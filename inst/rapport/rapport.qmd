@@ -1,0 +1,28 @@
+---
+title: "rapport"
+author : Juliette Grison
+format: html
+params:
+  code_commune: "Bordeaux"
+  code_departement: "Gironde"
+---
+
+```{r Set up}
+remotes::install_github("juliette-grison/firstlib_juliette")
+library(firstlibjuliette)
+df <- firstlibjuliette::df
+```
+
+```{r Commune}
+df_commune <- df[df[["Libellé.de.la.commune"]] == params$code_commune, ]
+df_commune <- creer_commune(df_commune)
+summary(df_commune)
+plot(df_commune)
+```
+
+```{r Département}
+df_departement <- df[df[["Libellé.du.département"]] == params$code_departement, ]
+df_departement <- creer_departement(df_departement)
+summary(df_departement)
+plot(df_departement)
+```
